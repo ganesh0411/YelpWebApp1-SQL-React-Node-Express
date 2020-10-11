@@ -16,7 +16,9 @@ class OwnerProfile extends Component{
             restname : "",
             restzip : "",
             cuisine : "",
-            updateStatus : ""
+            updateStatus : "",
+            description: "",
+            timings: ""
         }
         this.changeHandler = this.changeHandler.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -28,11 +30,14 @@ class OwnerProfile extends Component{
     }
 
     componentWillMount(){
-        if(cookie.load('cookieemail')){
-            var username = cookie.load('cookieemail');
-            this.setState({
-                email : username
-            })
+        var username = '';
+        if(this.props.location && this.props.location['email']) {
+            username = this.props.location.email;
+        } else if(cookie.load('cookieemail')) {
+            username = cookie.load('cookieemail');
+        }
+
+        if(username != "") {
             console.log("Checking Email : " + this.state.email);
             const data = {
                 email : username
@@ -43,11 +48,14 @@ class OwnerProfile extends Component{
                 if(response.status === 200){
                     //console.log(response.data)
                     this.setState({
+                        email: response.data.OWNEREMAIL,
                         name : response.data.OWNERNAME,
                         mob : response.data.OWNERMOB,
                         restname : response.data.REST_NAME,
                         restzip : response.data.REST_ZIP,
-                        cuisine : response.data.CUISINE
+                        cuisine : response.data.CUISINE,
+                        description: response.data.description,
+                        timings: response.data.timings
                     })
                     console.log(this.state);
 
@@ -67,7 +75,9 @@ class OwnerProfile extends Component{
                 mob : this.state.mob,
                 restzip : this.state.restzip,
                 cuisine : this.state.cuisine,
-                email : this.state.email
+                email : this.state.email,
+                description: this.state.description,
+                timings: this.state.timings
             }
 
             axios.post(rooturl + '/OwnerProfile', data)
@@ -125,15 +135,27 @@ class OwnerProfile extends Component{
                     </div>
                     </div>
                     <div class="form-group">
-                    <label class="control-label col-sm-2" for="restzip">Restaurant Zip:</label>
+                    <label class="control-label col-sm-2" for="restzip">Location:</label>
                     <div class="col-sm-10">
                         <input type="text" onChange = {this.changeHandler} value={this.state.restzip} class="form-control" id="restzip" placeholder="Restaurant Zip" name="restzip"/>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="description">Description:</label>
+                    <div class="col-sm-10">
+                        <input type="text" onChange = {this.changeHandler} value={this.state.description} class="form-control" id="description" placeholder="Description" name="description"/>
                     </div>
                     </div>
                     <div class="form-group">
                     <label class="control-label col-sm-2" for="cuisine">Cuisine:</label>
                     <div class="col-sm-10">
                         <input type="text" onChange = {this.changeHandler} value={this.state.cuisine} class="form-control" id="cuisine" placeholder="cuisine" name="cuisine"/>
+                    </div>
+                    </div>
+                    <div class="form-group">
+                    <label class="control-label col-sm-2" for="timings">Timings:</label>
+                    <div class="col-sm-10">
+                        <input type="text" onChange = {this.changeHandler} value={this.state.timings} class="form-control" id="timings" placeholder="Timings" name="timings"/>
                     </div>
                     </div>
                     

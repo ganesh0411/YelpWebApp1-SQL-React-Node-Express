@@ -116,10 +116,16 @@ class OwnerDashboard extends Component{
             }
     
             var newOrderDetails = this.state.newOrders.map(result => {
+                const newTo = { 
+                    pathname: "/UserProfile", 
+                    email: result.username
+                };
                 return(
                     <tbody key={result.cartid}>
                     <tr>
-                    <th>ID : {result.cartid} | Customer : {result.username} | Status : {result.orderstatus} | Total : {result.totalprice}</th>
+                    <th>ID : {result.cartid} | Customer :
+                      <Link to={newTo}>{result.username}</Link>
+                      | Status : {result.orderstatus} | Total : {result.totalprice}</th>
                     
                     </tr>
                     <tr><th>Address : {result.address}</th>

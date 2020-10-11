@@ -208,6 +208,11 @@ class ViewRestaurant extends Component {
                 
                 <button type = "submit"  onClick = {this.placeorder} class="btn btn-danger">Calculate Total</button>
                 <h3>Order Total : {this.state.totalprice}</h3>
+                <select>
+                    <option value="DELIVERY">DELIVERY</option>
+                    <option value="PICKUP">PICKUP</option>
+                </select>
+
                 <button type = "submit"  onClick = {this.onsubmit} class="btn btn-danger">Place Order</button>  
                 </div>
 

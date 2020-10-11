@@ -4,8 +4,8 @@ var crypt = {};
 var saltRounds = 10;
 
 crypt.createHash = function (data, successCallback, failureCallback) {
-    bcrypt.genSalt(saltRounds, function (error, salt) {
-        if (error) {
+    bcrypt.genSalt(saltRounds, function (err, salt) {
+        if (err) {
             failureCallback(err);
             return;
         }

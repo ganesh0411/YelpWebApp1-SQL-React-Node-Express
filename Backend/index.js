@@ -9,15 +9,24 @@ var bodyParser = require('body-parser');
 var session = require('express-session');
 var cookieParser = require('cookie-parser');
 var cors = require('cors');
+app.set('view engine', 'ejs');
+var mysql = require('mysql');
 var pool = require('./src/helpers/pool.js');
 //var db = mysql.createConnection();
-var sql = "SELECT * FROM USER";
+var sql = "SELECT * FROM USERS";
+var encrypt = require('./src/helpers/passwordEncryption.js');
+
+//var con = require('./src/helpers/pool.js');
+//   con.connect(function(err) {
+//     if (err) throw err;
+//     console.log("DB Connected!");
+//   });
 
 app.use(session({
-    secret              : 'cmpe273_yelp_mysql',
+    secret              : 'cmpe273_homeaway_mysql',
     resave              : false, // Forces the session to be saved back to the session store, even if the session was never modified during the request
     saveUninitialized   : false, // Force to save uninitialized session to db. A session is uninitialized when it is new but not modified.
-    duration            : 60 * 60 * 1000,    // Overall duration of Session : 30 minutes : 1800 seconds
+    duration            : 60 * 60 * 1000,    // Overall duration of Session : 30 minutes : 1800 seconds
     activeDuration      :  5 * 60 * 1000
 }));
 
@@ -35,14 +44,20 @@ pool.query(sql, function(err, output){
         throw err;
     } else {
         console.log("Database connection established");
-    }   
+        //res.send("Hello World");
+    }
+        
 })
 
-var usersignup = require('./src/routes/loginsignup/usersignup');
-var restaurantsignup = require('./src/routes/loginsignup/restaurantsignup');
-var userlogin = require('./src/routes/loginsignup/userlogin');
 
 
+
+//Routes
+var loginsignup = require('./src/routes/loginsignup');
+var profileupdate = require('./src/routes/profileupdate');
+var userdashboard = require('./src/routes/userdashboard');
+var restaurantenu = require('./src/routes/restaurantmenu');
+var cartorder = require('./src/routes/cartorder');
 
 app.use(express.static('public'));
 var basePath = '/';
@@ -50,11 +65,13 @@ app.use(cors({ origin: rooturl, credentials: true }));
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(basePath, loginsignup);
+app.use(basePath, profileupdate);
+app.use(basePath, userdashboard);
+app.use(basePath, restaurantenu);
+app.use(basePath, cartorder);
+app.use('/uploads', express.static(path.join(__dirname, '/uploads/')));
 
-
-app.use(basePath, usersignup);
-app.use(basePath, restaurantsignup);
-app.use(basePath, userlogin);
 
 app.listen(port);
 console.log("Server Listening on port " + port);

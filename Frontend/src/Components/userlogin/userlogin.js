@@ -39,7 +39,7 @@ class UserLogin extends Component{
             }
             axios.defaults.withCredentials = true;
 
-            axios.post(rooturl + '/userlogin', data)
+            axios.post(rooturl + '/loginUser', data)
             .then(response => {
                 console.log("Response Status: " + response.status);
                 if(response.status === 200){
