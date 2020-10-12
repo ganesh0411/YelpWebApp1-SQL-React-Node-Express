@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import cookie from 'react-cookies';
 import {Link, Redirect} from 'react-router-dom';
 import bootstrap from 'bootstrap';
-
+import logo from '../Components/logo.jpg';
 
 class NavBar extends Component{
     handleLogout = () => {
@@ -33,6 +33,7 @@ class NavBar extends Component{
                 <nav class="navbar navbar-expand-sm bg-danger navbar-dark fixed-top">
 	            <div class="container">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
+                <img src={logo} style={{height: "44px"}}/>
                 <ul class="navbar-nav ml-auto">
                 <li class="nav-item"><Link to="/UserLogin"><button type="button" class="btn btn-danger" id = "userLogin">Login</button></Link></li>
                 <li class="nav-item"><Link to="/UserSignUp"><button type="button" class="btn btn-danger" id = "userSignUp">Signup</button></Link></li>
@@ -44,8 +45,8 @@ class NavBar extends Component{
 	            <div class="container">
                 <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
-                <li class="nav-item"><Link to="/OwnerLogin"><button type="button" class="btn btn-danger" id = "ownerLogin">Owner Login</button></Link></li>
-                <li class="nav-item"><Link to="/OwnerSignUp"><button type="button" class="btn btn-danger" id = "ownerSignUp">Owner Signup</button></Link></li>
+                <li class="nav-item"><Link to="/OwnerLogin"><button type="button" class="btn btn-danger" id = "ownerLogin">Restaurant Login</button></Link></li>
+                <li class="nav-item"><Link to="/OwnerSignUp"><button type="button" class="btn btn-danger" id = "ownerSignUp">Restaurant Signup</button></Link></li>
                 </ul>
                 </div>
 	            </div>
