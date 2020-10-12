@@ -1,1 +1,1 @@
-export const rooturl = "http://3.101.62.210:3001";
+export const rooturl = "http://localhost:3001";

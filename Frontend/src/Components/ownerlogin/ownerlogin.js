@@ -76,7 +76,7 @@ class OwnerLogin extends Component{
                 <div class="card card-signin flex-row my-5">
                 
                 <div class="card-body">
-                <h5 class="card-title text-center">Owner Login</h5>
+                <h5 class="card-title text-center">Restaurant Login</h5>
                 <form class="form-signin">
                     
                     
