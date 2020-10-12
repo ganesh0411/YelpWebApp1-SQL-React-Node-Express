@@ -155,7 +155,7 @@ class UserDashboard extends Component{
                     <thead>
                         <tr>
                             <th>Restaurant Name</th>
-                            <th>Cuisine</th>
+                            
                             <th></th>
                         </tr>
                     </thead>

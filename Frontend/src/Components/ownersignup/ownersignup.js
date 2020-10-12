@@ -88,7 +88,7 @@ class OwnerSignUp extends Component{
                 <div class="card card-signin flex-row my-5">
                 
                 <div class="card-body">
-                <h5 class="card-title text-center">Owner Registration</h5>
+                <h5 class="card-title text-center">Restaurant Signup</h5>
                 <form class="form-signin" onSubmit={this.onSubmit}>
                     <div class="form-label-group">
                     <input type="text" name="fname" id="fname" onChange={this.changeHandler} class="form-control" placeholder="First Name" required />
